@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Survey Form</title>
+  <style>
+    /* Add your CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Survey Form</h1>
+    <form id="survey-form">
+      <div class="form-group">
+        <label for="first-name">First Name:</label>
+        <input type="text" id="first-name" name="first-name" required>
+      </div>
+      <div class="form-group">
+        <label for="last-name">Last Name:</label>
+        <input type="text" id="last-name" name="last-name" required>
+      </div>
+      <div class="form-group">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required>
+      </div>
+      <div class="form-group">
+        <label for="country">Country:</label>
+        <select id="country" name="country" required>
+          <option value="usa">USA</option>
+          <option value="canada">Canada</option>
+          <!-- Add more countries here -->
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Gender:</label>
+        <input type="checkbox" id="male" name="gender" value="male"> Male
+        <input type="checkbox" id="female" name="gender" value="female"> Female
+      </div>
+      <div class="form-group">
+        <label for="profession">Profession:</label>
+        <input type="text" id="profession" name="profession" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="mobile-number">Mobile Number:</label>
+        <input type="tel" id="mobile-number" name="mobile-number" required>
+      </div>
+      <div class="form-group">
+        <button type="submit" id="submit-button">Submit</button>
+        <button type="reset" id="reset-button">Reset</button>
+      </div>
+    </form>
+  </div>
+  <script>
+    const form = document.getElementById("survey-form");
+    const submitButton = document.getElementById("submit-button");
+    const resetButton = document.getElementById("reset-button");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Perform necessary validations here
+
+      // Create a popup displaying selected values
+      const selectedValues = {
+        "First Name": form.elements["first-name"].value,
+        "Last Name": form.elements["last-name"].value,
+        "Date of Birth": form.elements["dob"].value,
+        "Country": form.elements["country"].value,
+        "Gender": Array.from(form.elements["gender"])
+          .filter((checkbox) => checkbox.checked)
+          .map((checkbox) => checkbox.value)
+          .join(", "),
+        "Profession": form.elements["profession"].value,
+        "Email": form.elements["email"].value,
+        "Mobile Number": form.elements["mobile-number"].value,
+      };
+
+      let popupText = "Selected Values:\n";
+      for (const key in selectedValues) {
+        popupText += `${key}: ${selectedValues[key]}\n`;
+      }
+
+      alert(popupText);
+
+      // Reset the form
+      form.reset();
+    });
+  </script>
+</body>
+</html>
+
